@@ -55,7 +55,7 @@ exports.registerUser = async (req, res) => {
 }
 
 // Function Login User
-exports.getUser = async (req, res) => {
+exports.loginUser = async (req, res) => {
     const { email, password } = req.body
 
     // Validations
@@ -94,13 +94,29 @@ exports.getUser = async (req, res) => {
             id: user.id
         }, secret)
 
-        return res.status(200).send({ user, token })
+        return res.status(200).send({ token })
     } catch(e) {
         console.log(e)
         return res.status(500).send({ error: 'Server error!' })
     }
 }
 
+exports.getUser = async (req, res) => {
+    const { id } = req.params
+
+    // Check if user exists
+    const user = await User.findOne({
+        where: {
+            id: id
+        }
+    })
+
+    if (!user) {
+        return res.status(404).send({ error: 'User not found!' })
+    }
+
+    return res.send(user)
+}
 
 // Function check token
 exports.checkToken = async (req, res, next) => {

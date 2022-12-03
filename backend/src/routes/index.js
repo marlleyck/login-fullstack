@@ -8,8 +8,10 @@ router.get('/', authController.home)
 
 router.post('/auth/register', authController.registerUser)
 
+router.post('/auth/user', authController.loginUser)
+
 // Private Route
-router.post('/auth/user', authController.checkToken, authController.getUser)
+router.get('/auth/user/:id', authController.checkToken, authController.getUser)
 
 
 module.exports = router
