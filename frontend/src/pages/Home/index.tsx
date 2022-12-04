@@ -1,12 +1,22 @@
-import { useContext } from "react"
-import { AppContext } from "../../contexts/AppContext"
+import { useNavigate } from "react-router-dom"
 
 export const Home = () => {
-    const { handleLogin } = useContext(AppContext)
+    const navigate = useNavigate()
+
+    const handleGoLogin = () => {
+        navigate('/login')
+    }
+
+    const handleGoRegister = () => {
+        navigate('/register')
+    }
     return (
         <>
             <h1>Home</h1>
-            <button onClick={handleLogin}>Logar</button>
+            <button
+            onClick={handleGoLogin}>Ir para tela de login</button>
+            <button
+            onClick={handleGoRegister}>Registrar-se</button>
         </>
     )
 }
