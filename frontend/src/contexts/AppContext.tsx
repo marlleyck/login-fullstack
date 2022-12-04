@@ -59,15 +59,15 @@ export const AppContextProvider = ({children}: {children: JSX.Element}) => {
             const tokenStorage = JSON.parse(localStorage.getItem('@login-fullstack:token') || '[]') ?? []
 
             if (tokenStorage) {
-                const { data } = await axios.get('http://localhost:8080/auth/token', {
+                /* const { data } = await axios.get('http://localhost:8080/auth/token', {
                     headers: {
                         authorization: `Bearer ${tokenStorage}`
                     }
-                })
+                }) */
 
                 // console.log(responseToken)
 
-                const response = await axios.get(`http://localhost:8080/auth/user/${data.tokenDecoded.id}`, {
+                const response = await axios.get('http://localhost:8080/auth/user', {
                 headers: {
                     authorization: `Bearer ${tokenStorage}`
                     }
