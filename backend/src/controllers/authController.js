@@ -103,12 +103,13 @@ exports.loginUser = async (req, res) => {
 
 // Function get user after login
 exports.getUser = async (req, res) => {
-    const { id } = req.params
+    // Take user id
+    const tokenDecoded = req.tokenDecoded
 
     // Check if user exists
     const user = await User.findOne({
         where: {
-            id: id
+            id: tokenDecoded.id
         }
     })
 
@@ -117,13 +118,6 @@ exports.getUser = async (req, res) => {
     }
 
     return res.send({ user })
-}
-
-// Function get token
-exports.getToken = async (req, res) => {
-    const tokenDecoded = req.tokenDecoded
-
-    return res.status(200).send({ tokenDecoded })
 }
 
 // Function check token
