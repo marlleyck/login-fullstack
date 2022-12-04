@@ -10,6 +10,8 @@ router.post('/auth/register', authController.registerUser)
 
 router.post('/auth/user', authController.loginUser)
 
+router.get('/auth/token', authController.checkToken, authController.getToken)
+
 // Private Route
 router.get('/auth/user/:id', authController.checkToken, authController.getUser)
 

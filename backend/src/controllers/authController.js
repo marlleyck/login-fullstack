@@ -94,13 +94,14 @@ exports.loginUser = async (req, res) => {
             id: user.id
         }, secret)
 
-        return res.status(200).send({ token })
+        return res.status(200).send({ user_id: user.id, token })
     } catch(e) {
         console.log(e)
         return res.status(500).send({ error: 'Server error!' })
     }
 }
 
+// Function get user after login
 exports.getUser = async (req, res) => {
     const { id } = req.params
 
@@ -115,7 +116,14 @@ exports.getUser = async (req, res) => {
         return res.status(404).send({ error: 'User not found!' })
     }
 
-    return res.send(user)
+    return res.send({ user })
+}
+
+// Function get token
+exports.getToken = async (req, res) => {
+    const tokenDecoded = req.tokenDecoded
+
+    return res.status(200).send({ tokenDecoded })
 }
 
 // Function check token
@@ -130,7 +138,8 @@ exports.checkToken = async (req, res, next) => {
     // Verify if token is valid
     try {
         const secret = process.env.SECRET
-        jwt.verify(token, secret)
+        const responseToken = jwt.verify(token, secret)
+        req.tokenDecoded = responseToken
 
         next()
     } catch(e) {
