@@ -8,7 +8,7 @@ import { UserType } from "../@types/UserType";
 export const AppContext = createContext({} as AppContextType)
 
 export const AppContextProvider = ({children}: {children: JSX.Element}) => {
-    const [authenticated, setAuthenticated] = useState(false)
+    const [authenticated, setAuthenticated] = useState<boolean | null>(null)
 
     const [nameRegister, setNameRegister] = useState('')
     const [emailRegister, setEmailRegister] = useState('')
@@ -74,6 +74,8 @@ export const AppContextProvider = ({children}: {children: JSX.Element}) => {
                 setUser(response.data.user)
                 setAuthenticated(true)
                 // navigate('/profile') 
+            } else {
+                setAuthenticated(false)
             }
         }
 

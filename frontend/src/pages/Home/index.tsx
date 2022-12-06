@@ -19,12 +19,13 @@ export const Home = () => {
     const handleGoProfile = () => {
         navigate('/profile')
     }
+    {console.log(authenticated)}
     return (
         <div className={styles.container}>
             <h1 className={styles.title}>Home</h1>
             <div className={styles.content}>
                 {
-                    !authenticated ?
+                    authenticated !== null && !authenticated ?
                     <>
                         <button
                         onClick={handleGoLogin}>Ir para tela de login</button>
