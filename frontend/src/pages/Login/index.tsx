@@ -1,16 +1,14 @@
-import { useContext } from "react"
-import { AppContext } from "../../contexts/AppContext"
-
 import { FormLogin } from "../../components/FormLogin"
+import { GoBackButton } from "../../components/GoBackButton"
+
+import styles from './styles.module.css'
 
 export const Login = () => {
-    const { handleLogin } = useContext(AppContext)
     
     return (
-        <>
-            <h1>Login</h1>
+        <div className={styles.container}>
+            <GoBackButton />
             <FormLogin />
-            <button onClick={handleLogin}>Logar</button>
-        </>
+        </div>
     )
 }
