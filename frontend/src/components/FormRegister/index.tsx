@@ -40,6 +40,7 @@ export const FormRegister = () => {
                 </div>
 
                 <button
+                type="button"
                 onClick={propsCtx.handleRegisterUser}>Registrar-se</button>
             </main>
         </form>

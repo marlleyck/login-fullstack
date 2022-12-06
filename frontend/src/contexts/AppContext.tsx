@@ -22,14 +22,13 @@ export const AppContextProvider = ({children}: {children: JSX.Element}) => {
     const navigate = useNavigate()
 
     const handleRegisterUser = async () => {
-        const response = await api.post('/auth/register', {
+        await api.post('/auth/register', {
             name: nameRegister,
             email: emailRegister,
             password: passwordRegister,
             confirmPassword: confirmPasswordRegister
         })
-
-        console.log(response)
+        navigate('/login')
     }
 
     const handleLogin = async () => {
@@ -56,9 +55,12 @@ export const AppContextProvider = ({children}: {children: JSX.Element}) => {
     }
 
     const handleLogout = async () => {
-        localStorage.removeItem('@login-fullstack:token')
-        setAuthenticated(false)
-        navigate('/')
+        const result = confirm('Deseja realmente sair?')
+        if (result) {
+            localStorage.removeItem('@login-fullstack:token')
+            setAuthenticated(false)
+            navigate('/')
+        }
     }
 
     useEffect(() => {
