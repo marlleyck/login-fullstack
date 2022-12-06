@@ -34,6 +34,18 @@ exports.registerUser = async (req, res) => {
         return res.status(401).send({ error: 'Passwords do not match!' })
     }
 
+    // Get user email
+    const userEmail = await User.findOne({
+        where: {
+            email: email
+        }
+    })
+
+    // Check if email exists
+    if (userEmail) {
+        return res.status(400).send({ error: 'Email already exists!' })
+    }
+
     // Generate salt and hash password
     const salt = await bcrypt.genSalt(12)
     const hashPassword = await bcrypt.hash(password, salt)
@@ -67,7 +79,7 @@ exports.loginUser = async (req, res) => {
         return res.status(400).send({ error: 'Password is required!' })
     }
 
-    // Get user
+    // Get user email
     const user = await User.findOne({
         where: {
             email: email
