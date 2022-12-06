@@ -23,6 +23,8 @@
     flex-direction: column;
 
     width: 30%;
+    min-width: 230px;
+    max-width: 480px;
     padding: 20px;
     border-radius: 25px 0 25px 0;
     background-color: #2c2a35;
