@@ -6,7 +6,7 @@ export const GoBackButton = () => {
     return (
         <IoArrowBackCircleSharp
         color="white"
-        size={30} 
+        size={40} 
         style={{position: 'absolute', top: 0, left: 0, cursor: 'pointer'}}
         onClick={() => navigate('/')} />
     )

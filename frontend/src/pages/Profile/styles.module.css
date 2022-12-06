@@ -1,0 +1,35 @@
+.container {
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+
+    color: white;
+
+    background-color: #17181F;
+
+    position: relative;
+}
+
+.content {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 20px 0 20px;
+}
+
+.title {
+    font-family: sans-serif;
+    font-size: 3rem;
+}
+
+.userName {
+    font-family: sans-serif;
+    font-weight: lighter;
+}

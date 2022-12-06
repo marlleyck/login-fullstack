@@ -5,7 +5,7 @@ import { AppContext } from "../../contexts/AppContext"
 import styles from './styles.module.css'
 
 export const Home = () => {
-    const { authenticated } = useContext(AppContext)
+    const { authenticated, user } = useContext(AppContext)
     const navigate = useNavigate()
 
     const handleGoLogin = () => {
@@ -19,24 +19,34 @@ export const Home = () => {
     const handleGoProfile = () => {
         navigate('/profile')
     }
-    {console.log(authenticated)}
     return (
         <div className={styles.container}>
-            <h1 className={styles.title}>Home</h1>
-            <div className={styles.content}>
-                {
-                    authenticated !== null && !authenticated ?
-                    <>
-                        <button
-                        onClick={handleGoLogin}>Ir para tela de login</button>
-                        <button
-                        onClick={handleGoRegister}>Registrar-se</button>
-                    </>
-                    : <button
-                      onClick={handleGoProfile}>Perfil</button>
-                }
-                
-            </div>
+            {
+                authenticated !== null &&
+                <>
+                    <h1 className={styles.title}>Home</h1>
+
+                    {
+                        authenticated &&
+                        <h1>Bem vindo (a) {user?.name}</h1>
+                    }
+
+                    <div className={styles.content}>
+                        {
+                            !authenticated ?
+                            <>
+                                <button
+                                onClick={handleGoLogin}>Ir para tela de login</button>
+                                <button
+                                onClick={handleGoRegister}>Registrar-se</button>
+                            </>
+                            
+                            : <button
+                            onClick={handleGoProfile}>Perfil</button>
+                        }
+                    </div>
+                </>
+            }
         </div>
     )
 }
