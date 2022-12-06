@@ -22,36 +22,55 @@ export const AppContextProvider = ({children}: {children: JSX.Element}) => {
     const navigate = useNavigate()
 
     const handleRegisterUser = async () => {
-        await api.post('/auth/register', {
-            name: nameRegister,
-            email: emailRegister,
-            password: passwordRegister,
-            confirmPassword: confirmPasswordRegister
-        })
-        navigate('/login')
+        if (nameRegister === '' || emailRegister === '' 
+        || passwordRegister === '' || confirmPasswordRegister === '') {
+            alert('Preencha todos os campos!')
+        } else {
+            try {
+                await api.post('/auth/register', {
+                    name: nameRegister,
+                    email: emailRegister,
+                    password: passwordRegister,
+                    confirmPassword: confirmPasswordRegister
+                })
+                navigate('/login')
+            } catch(e: any) {
+                alert(`${e.response.data.error}`)
+                console.log(e)
+            }
+        }
     }
 
     const handleLogin = async () => {
-        const { data } = await api.post('/auth/user', {
-            email: emailLogin,
-            password: passwordLogin
-        })
-
-        const token = data.token
-        localStorage.setItem('@login-fullstack:token', JSON.stringify(token))
-
-        const response = await api.get(`/auth/user`, {
-            headers: {
-                authorization: `Bearer ${token}`
+        if (emailLogin === '' || passwordLogin === '') {
+            alert('Preencha todos os campos!')
+        } else {
+            try {
+                const { data } = await api.post('/auth/user', {
+                    email: emailLogin,
+                    password: passwordLogin
+                })
+        
+                const token = data.token
+                localStorage.setItem('@login-fullstack:token', JSON.stringify(token))
+        
+                const response = await api.get(`/auth/user`, {
+                    headers: {
+                        authorization: `Bearer ${token}`
+                    }
+                })
+        
+                setUser(response.data.user)
+                setAuthenticated(true)
+                navigate('/profile')
+        
+                setEmailLogin('')
+                setPasswordLogin('')
+            } catch(e: any) {
+                alert(`${e.response.data.error}`)
+                console.log(e)
             }
-        })
-
-        setUser(response.data.user)
-        setAuthenticated(true)
-        navigate('/profile')
-
-        setEmailLogin('')
-        setPasswordLogin('')
+        }
     }
 
     const handleLogout = async () => {
