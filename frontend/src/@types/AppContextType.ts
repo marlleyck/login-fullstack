@@ -1,6 +1,6 @@
 import { UserType } from "./UserType";
 export type AppContextType = {
-    authenticated: boolean;
+    authenticated: boolean | null;
     nameRegister: string;
     setNameRegister: (newState: string) => void;
     emailRegister: string;
