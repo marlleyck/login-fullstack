@@ -7,6 +7,7 @@ import styles from './styles.module.css'
 export const Home = () => {
     const { authenticated, user } = useContext(AppContext)
     const navigate = useNavigate()
+    
     const handleGoLogin = () => {
         navigate('/login')
     }
@@ -31,7 +32,7 @@ export const Home = () => {
                         <h1>Bem vindo (a) {user?.name}</h1>
                     }
 
-                    <div className={styles.content}>
+                    <main className={styles.content}>
                         {
                             !authenticated ?
                             <>
@@ -44,7 +45,7 @@ export const Home = () => {
                             : <button
                             onClick={handleGoProfile}>Perfil</button>
                         }
-                    </div>
+                    </main>
                 </>
             }
         </div>

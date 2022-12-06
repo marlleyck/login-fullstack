@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import axios from 'axios';
+import { api } from "../services/api";
 import { useNavigate } from 'react-router-dom';
 
 import { AppContextType } from "../@types/AppContextType";
@@ -22,7 +22,7 @@ export const AppContextProvider = ({children}: {children: JSX.Element}) => {
     const navigate = useNavigate()
 
     const handleRegisterUser = async () => {
-        const response = await axios.post('http://localhost:8080/auth/register', {
+        const response = await api.post('/auth/register', {
             name: nameRegister,
             email: emailRegister,
             password: passwordRegister,
@@ -33,7 +33,7 @@ export const AppContextProvider = ({children}: {children: JSX.Element}) => {
     }
 
     const handleLogin = async () => {
-        const { data } = await axios.post('http://localhost:8080/auth/user', {
+        const { data } = await api.post('/auth/user', {
             email: emailLogin,
             password: passwordLogin
         })
@@ -41,7 +41,7 @@ export const AppContextProvider = ({children}: {children: JSX.Element}) => {
         const token = data.token
         localStorage.setItem('@login-fullstack:token', JSON.stringify(token))
 
-        const response = await axios.get(`http://localhost:8080/auth/user`, {
+        const response = await api.get(`/auth/user`, {
             headers: {
                 authorization: `Bearer ${token}`
             }
@@ -65,7 +65,7 @@ export const AppContextProvider = ({children}: {children: JSX.Element}) => {
         const fetchUser = async () => {
             const tokenStorage = JSON.parse(localStorage.getItem('@login-fullstack:token') || '[]') ?? []
             if (typeof tokenStorage === 'string') {
-                const response = await axios.get('http://localhost:8080/auth/user', {
+                const response = await api.get('/auth/user', {
                 headers: {
                     authorization: `Bearer ${tokenStorage}`
                     }
@@ -73,7 +73,7 @@ export const AppContextProvider = ({children}: {children: JSX.Element}) => {
 
                 setUser(response.data.user)
                 setAuthenticated(true)
-                // navigate('/profile') 
+                navigate('/profile') 
             } else {
                 setAuthenticated(false)
             }

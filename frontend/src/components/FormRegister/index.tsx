@@ -6,9 +6,9 @@ import styles from './styles.module.css'
 export const FormRegister = () => {
     const propsCtx = useContext(AppContext)
     return (
-        <div className={styles.container}>
+        <form className={styles.container}>
             <h1 className={styles.title}>Registrar-se</h1>
-            <div className={styles.content}>
+            <main className={styles.content}>
                 <div className={styles.contentInputs}>
                     <input
                     className={styles.inputsRegister} 
@@ -41,7 +41,7 @@ export const FormRegister = () => {
 
                 <button
                 onClick={propsCtx.handleRegisterUser}>Registrar-se</button>
-            </div>
-        </div>
+            </main>
+        </form>
     )
 }

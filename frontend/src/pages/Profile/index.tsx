@@ -11,11 +11,11 @@ export const Profile = () => {
             <GoBackButton />
             <h1 className={styles.title}>Profile</h1>
 
-            <div className={styles.content}>
+            <main className={styles.content}>
                 <h2 className={styles.userName}>{user?.name}</h2>
                 <button
                 onClick={handleLogout}>Logout</button>
-            </div>
+            </main>
         </div>
     )
 }

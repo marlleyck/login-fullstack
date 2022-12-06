@@ -6,7 +6,7 @@ import styles from './styles.module.css'
 export const FormLogin = () => {
     const { emailLogin, setEmailLogin, passwordLogin, setPasswordLogin, handleLogin } = useContext(AppContext)
     return (
-            <>
+            <form className={styles.container}>
                 <h1 className={styles.title}>Login</h1>
                 <div className={styles.content}>
                     <div className={styles.contentInputs}>
@@ -25,6 +25,6 @@ export const FormLogin = () => {
                     </div>
                     <button onClick={handleLogin}>Logar</button>
                 </div>
-            </>
+            </form>
     )
 }
