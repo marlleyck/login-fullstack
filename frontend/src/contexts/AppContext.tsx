@@ -34,6 +34,10 @@ export const AppContextProvider = ({children}: {children: JSX.Element}) => {
                     confirmPassword: confirmPasswordRegister
                 })
                 navigate('/login')
+                setNameRegister('')
+                setEmailRegister('')
+                setPasswordRegister('')
+                setConfirmPasswordRegister('')
             } catch(e: any) {
                 alert(`${e.response.data.error}`)
                 console.log(e)
