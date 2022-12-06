@@ -1,5 +1,47 @@
 <h1 align="center">Login FullStack</h1>
 
+<div align="center">
+  <div width="100%">
+    <img src="screenshots/Desktop/Desktop_Home_NotAuth.png">
+  </div>
+  <hr />
+  <br />
+  
+  <div width="100%">
+    <img src="screenshots/Desktop/Desktop_Home_Auth.png">
+  </div>
+  <hr />
+  <br />
+  
+  <div width="100%">
+    <img src="screenshots/Desktop/Desktop_Register.png">
+  </div>
+  <hr />
+  <br />
+  
+  <div width="100%">
+    <img src="screenshots/Desktop/Desktop_Profile.png">
+  </div>
+  <hr />
+  <br />
+  
+  <div width="100%">
+    <img src="screenshots/Desktop/Desktop_Login.png">
+  </div>
+  <hr />
+  <br />
+  
+  <div width="100%">
+    <img src="screenshots/Mobile/Mobile_Profile.png">
+  </div>
+  <hr />
+  <br />
+  
+  <div width="100%">
+    <img src="screenshots/Mobile/Mobile_Home.png">
+  </div>
+</div>
+
 <h1 align="center">:sparkles: Tecnologias</h1>
 <p align="center">Esse projeto foi desenvolvido com</h1>
 <br />
