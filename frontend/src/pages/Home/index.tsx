@@ -4,7 +4,6 @@ import { AppContext } from "../../contexts/AppContext"
 
 import styles from './styles.module.css'
 
-
 export const Home = () => {
     const { authenticated } = useContext(AppContext)
     const navigate = useNavigate()
@@ -25,19 +24,15 @@ export const Home = () => {
             <h1 className={styles.title}>Home</h1>
             <div className={styles.content}>
                 {
-                    !authenticated &&
-                    <button
-                    onClick={handleGoLogin}>Ir para tela de login</button>
-                }
-                {
-                    !authenticated &&
-                    <button
-                    onClick={handleGoRegister}>Registrar-se</button>
-                }
-                {
-                    authenticated &&
-                    <button
-                    onClick={handleGoProfile}>Perfil</button>
+                    !authenticated ?
+                    <>
+                        <button
+                        onClick={handleGoLogin}>Ir para tela de login</button>
+                        <button
+                        onClick={handleGoRegister}>Registrar-se</button>
+                    </>
+                    : <button
+                      onClick={handleGoProfile}>Perfil</button>
                 }
                 
             </div>
