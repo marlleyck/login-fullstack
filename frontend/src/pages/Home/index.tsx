@@ -7,7 +7,6 @@ import styles from './styles.module.css'
 export const Home = () => {
     const { authenticated, user } = useContext(AppContext)
     const navigate = useNavigate()
-
     const handleGoLogin = () => {
         navigate('/login')
     }
@@ -22,6 +21,7 @@ export const Home = () => {
     return (
         <div className={styles.container}>
             {
+                
                 authenticated !== null &&
                 <>
                     <h1 className={styles.title}>Home</h1>
