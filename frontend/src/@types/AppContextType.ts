@@ -1,3 +1,4 @@
+import { UserType } from "./UserType";
 export type AppContextType = {
     authenticated: boolean;
     nameRegister: string;
@@ -14,5 +15,6 @@ export type AppContextType = {
     setPasswordLogin: (newState: string) => void;
     handleRegisterUser: () => void;
     handleLogin: () => void;
-    user: any;
+    handleLogout: () => void;
+    user: UserType | undefined;
 }
