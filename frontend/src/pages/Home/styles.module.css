@@ -17,6 +17,11 @@
     font-size: 3rem;
 }
 
+.subTitle {
+    font-family: sans-serif;
+    margin-bottom: 10px;
+}
+
 .content {
     width: 100%;
 

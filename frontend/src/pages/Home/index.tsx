@@ -29,7 +29,7 @@ export const Home = () => {
 
                     {
                         authenticated &&
-                        <h1>Bem vindo (a) {user?.name}</h1>
+                        <h1 className={styles.subTitle}>Bem vindo (a) {user?.name}</h1>
                     }
 
                     <main className={styles.content}>
