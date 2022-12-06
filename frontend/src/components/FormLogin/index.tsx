@@ -23,7 +23,7 @@ export const FormLogin = () => {
                         value={passwordLogin}
                         onChange={(e: any) => setPasswordLogin(e.target.value)} />
                     </div>
-                    <button onClick={handleLogin}>Logar</button>
+                    <button type="button" onClick={handleLogin}>Logar</button>
                 </div>
             </form>
     )
