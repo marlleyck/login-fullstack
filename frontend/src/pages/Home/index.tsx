@@ -1,53 +1,73 @@
-import { useContext } from "react"
-import { useNavigate } from "react-router-dom"
-import { AppContext } from "../../contexts/AppContext"
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
-import styles from './styles.module.css'
+import { useAppSelector } from "../../store/hooks";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../store";
+import { fetchUser } from "../../store/fetchActions";
+import { authenticatedActions } from "../../store/ducks/authenticated";
+
+import styles from "./styles.module.css";
 
 export const Home = () => {
-    const { authenticated, user } = useContext(AppContext)
-    const navigate = useNavigate()
-    
-    const handleGoLogin = () => {
-        navigate('/login')
-    }
+  const user = useAppSelector((state) => state.user);
 
-    const handleGoRegister = () => {
-        navigate('/register')
-    }
+  const navigate = useNavigate();
 
-    const handleGoProfile = () => {
-        navigate('/profile')
-    }
-    return (
-        <div className={styles.container}>
-            {
-                
-                authenticated !== null &&
-                <>
-                    <h1 className={styles.title}>Home</h1>
+  const dispatch = useDispatch<AppDispatch>();
 
-                    {
-                        authenticated &&
-                        <h1 className={styles.subTitle}>Bem vindo (a) {user?.name}</h1>
-                    }
+  const authenticated = useAppSelector((state) => state.authenticated);
 
-                    <main className={styles.content}>
-                        {
-                            !authenticated ?
-                            <>
-                                <button
-                                onClick={handleGoLogin}>Ir para tela de login</button>
-                                <button
-                                onClick={handleGoRegister}>Registrar-se</button>
-                            </>
-                            
-                            : <button
-                            onClick={handleGoProfile}>Perfil</button>
-                        }
-                    </main>
-                </>
-            }
-        </div>
-    )
-}
+  useEffect(() => {
+    const userIsAuthenticated = async () => {
+      const response = await dispatch(fetchUser());
+
+      if (
+        response.payload.user &&
+        typeof response.payload.user.id == "number"
+      ) {
+        dispatch(authenticatedActions.setValue(true));
+      } else if (response.payload === false) {
+        dispatch(authenticatedActions.setValue(false));
+      }
+    };
+
+    userIsAuthenticated();
+  }, []);
+
+  const handleGoLogin = () => {
+    navigate("/login");
+  };
+
+  const handleGoRegister = () => {
+    navigate("/register");
+  };
+
+  const handleGoProfile = () => {
+    navigate("/profile");
+  };
+  return (
+    <div className={styles.container}>
+      {authenticated.value !== null && (
+        <>
+          <h1 className={styles.title}>Home</h1>
+
+          {authenticated.value && (
+            <h1 className={styles.subTitle}>Bem vindo (a) {user.name}</h1>
+          )}
+
+          <main className={styles.content}>
+            {!authenticated.value ? (
+              <>
+                <button onClick={handleGoLogin}>Ir para tela de login</button>
+                <button onClick={handleGoRegister}>Registrar-se</button>
+              </>
+            ) : (
+              <button onClick={handleGoProfile}>Perfil</button>
+            )}
+          </main>
+        </>
+      )}
+    </div>
+  );
+};

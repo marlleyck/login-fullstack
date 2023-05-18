@@ -1,17 +1,16 @@
-import { useContext } from "react"
-import { AppContext } from "../contexts/AppContext"
+import { Navigate } from "react-router-dom";
+import { useAppSelector } from "../store/hooks";
 
-import { Navigate } from "react-router-dom"
+export const PrivateRoute = ({ children }: { children: JSX.Element }) => {
+  const authenticated = useAppSelector((state) => state.authenticated);
 
-export const PrivateRoute = ({children}: {children: JSX.Element}) => {
-    const { authenticated } = useContext(AppContext)
-    return (
-        <>
-            {
-                authenticated !== null && authenticated ? children : <Navigate to='/' />
-                
-            }
-        </>
-    )
-    
-}
+  return (
+    <>
+      {authenticated.value !== null && authenticated.value ? (
+        children
+      ) : (
+        <Navigate to="/" />
+      )}
+    </>
+  );
+};
