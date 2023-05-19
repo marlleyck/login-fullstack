@@ -22,10 +22,7 @@ export const Home = () => {
     const userIsAuthenticated = async () => {
       const response = await dispatch(fetchUser());
 
-      if (
-        response.payload.user &&
-        typeof response.payload.user.id == "number"
-      ) {
+      if (response.payload.user) {
         dispatch(authenticatedActions.setValue(true));
       } else if (response.payload === false) {
         dispatch(authenticatedActions.setValue(false));
